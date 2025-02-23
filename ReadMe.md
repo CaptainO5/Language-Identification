@@ -1,5 +1,4 @@
 # Language Identification with CRF
-
 This project aims to identify the language of each word in a given sentence. The dataset is based on IDRBT-FIRE social media data, where each sentence contains a maximum of two languages: English and one Indian language (Telugu, Malayalam, Tamil, Marathi, Hindi, Kannada, Bengali, or Gujarati).  
 
 ## **Approach**  
