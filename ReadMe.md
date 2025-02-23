@@ -1,19 +1,34 @@
-# Language Identification with CRF
+# **Language Identification with CRF**  
 
-The goal is to identify the language of each word, given a sentence. Examples are taken
-from IDRBT-FIRE social media data. The sentences are restricted to have a maximum of two
-languages, one of them being english and the other is an Indian language(Telugu, Malayalam,
-Tamil, Marathi, Hindi, Kannada, Bengali, Gujarati).
+This project aims to identify the language of each word in a given sentence. The dataset is based on IDRBT-FIRE social media data, where each sentence contains a maximum of two languages: English and one Indian language (Telugu, Malayalam, Tamil, Marathi, Hindi, Kannada, Bengali, or Gujarati).  
 
-## Approach
+## **Approach**  
 
+1. **Word-Level Classification**  
+   - Eight binary classifiers (Naïve Bayes) are trained to distinguish English from each Indian language using word lists.  
 
-- Eight binary classifiers (Eng vs Indian Language Naive bayes classifiers) are trained on
-  word lists.
-- The sentences are labeled with the languages present in the sentence
-- This is used to train a sentence level classifier (MLP model with one hidden layer of 100
-  units)
-- Label for each word is predicted using the binary classifiers
-- These predicted labels on the training data are mapped with actual labels for the
-  sentences and used to train a CRF model. CRF classifier is trained on a window of length
-  3. 
+2. **Sentence-Level Classification**  
+   - Sentences are labeled with the languages present (English + one Indian language).  
+   - A sentence-level classifier (MLP model with one hidden layer of 120 units) is trained to predict the language pair.  
+
+3. **Word Label Prediction**  
+   - The trained binary classifiers predict language labels for individual words.  
+
+4. **CRF-Based Sequence Modeling**  
+   - The predicted word-level labels are mapped to actual sentence-level labels.  
+   - A Conditional Random Fields (CRF) model is trained using a window size of 3 to refine the final language identification.  
+
+## **Dataset**  
+
+- `InputTraining.txt` / `InputTesting.txt` – Input sentences for training/testing.  
+- `AnnotationTraining.txt` / `AnnotationTesting.txt` – Labeled language annotations for training/testing.  
+- Word lists for different Indian languages:  
+  - `bengaliW.txt`  
+  - `gujaratiW.txt`  
+  - `hindiW.txt`  
+  - `kannadaW.txt`  
+  - `malayalamW.txt`  
+  - `maratiW.txt`  
+  - `tamil.txt`  
+  - `telugu.txt`  
+  - `eng2.txt` (English word list)  
